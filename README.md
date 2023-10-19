@@ -1,18 +1,56 @@
-## Getting Started
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+---
 
-## Folder Structure
+# Complementary Activity Management System
 
-The workspace contains two folders by default, where:
+Sistema de Gerenciamento de Atividades Complementares desenvolvido por **Robson Sousa da Silva**.
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+Este sistema permite a gestão das atividades complementares dos alunos, permitindo o cadastro de alunos, atividades e fornecendo funcionalidades para visualizar, editar e gerenciar as atividades.
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+## Funcionalidades
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+1. **Cadastrar Aluno:** Permite cadastrar um novo aluno informando nome completo, matrícula e curso.
 
-## Dependency Management
+2. **Cadastrar Atividade:** Permite cadastrar uma nova atividade complementar vinculada a um aluno. Informações como grupo de atividade e descrição são necessárias.
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+3. **Visualizar atividades a partir da matrícula:** Permite pesquisar e visualizar todas as atividades cadastradas para um aluno específico usando a matrícula.
+
+4. **Alterar status de aproveitamento da atividade:** Permite alterar o status de aproveitamento de uma atividade, marcando-a como aprovada ou não aprovada e preenchendo a carga horária considerada.
+
+5. **Mostrar carga horária total das atividades complementares dos alunos:** Exibe a carga horária total das atividades complementares de todos os alunos cadastrados.
+
+6. **Mostrar carga horária total das atividades complementares de um aluno:** Permite pesquisar e visualizar a carga horária total das atividades complementares de um aluno específico usando a matrícula.
+
+## Como Usar
+
+1. **Pré-requisitos:**
+   - Java instalado
+   - Terminal de linha de comando
+
+2. **Clone o repositório:**
+   ```bash
+   git clone https://github.com/seu-usuario/seu-repositorio.git
+   ```
+
+3. **Execute o programa:**
+   ```bash
+   cd seu-repositorio
+   javac Main.java
+   java Main
+   ```
+
+4. **Siga as instruções no terminal para interagir com o sistema.**
+
+## Contribuição
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou enviar um pull request.
+
+## Licença
+
+Este projeto é licenciado sob a [Licença MIT](LICENSE).
+
+--- 
+
+Lembre-se de substituir `seu-usuario` e `seu-repositorio` nos URLs de clone pelos seus detalhes específicos do GitHub.
+
+Espero que isso ajude! Se você tiver mais perguntas ou precisar de mais assistência, sinta-se à vontade para perguntar. Boa sorte com seu projeto!
