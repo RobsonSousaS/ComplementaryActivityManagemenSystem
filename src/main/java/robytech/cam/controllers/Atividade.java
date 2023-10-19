@@ -83,7 +83,7 @@ public class Atividade {
         System.out.print("Deseja salvar as informações da atividade? (s/n): ");
         String respostaSalvar = scanner.nextLine();
 
-        if (respostaSalvar.equalsIgnoreCase("s")) {
+        if (respostaSalvar.equalsIgnoreCase("s")||respostaSalvar.equalsIgnoreCase("sim")) {
             System.out.println("Informaçoes salvas!");
             atividades.add(atividade);
             return true;

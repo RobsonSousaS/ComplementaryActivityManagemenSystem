@@ -8,6 +8,7 @@ import main.java.robytech.cam.controllers.Atividade;
 
 public class aplication {
     public static void main(String[] args) {
+        
         ArrayList<Aluno> alunos = new ArrayList<>();
         ArrayList<Atividade> atividades = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
@@ -18,6 +19,8 @@ public class aplication {
             System.out.println("2. Cadastrar Atividade");
             System.out.println("3. Visualizar atividades a partir da matricula");
             System.out.println("4. Alterar status de aproveitamento da atividade");
+            System.out.println("5. Mostrar carga horária total das atividades complementares dos alunos");
+            System.out.println("6. Mostrar carga horária total das atividades complementares de um aluno");
             System.out.println("7. Sair");
 
             if (scanner.hasNextInt()) {
@@ -38,6 +41,15 @@ public class aplication {
                         break;
                     case 4:
                         Atividade.alterarStatusAproveitamento(atividades, alunos);
+                        break;
+                    case 5:
+                        Aluno.mostrarCargaHorariaTotal(alunos);
+                        break;
+                    case 6:
+                        System.out.print("Digite a matrícula do aluno para visualizar a carga horária total: ");
+                        int matriculaAluno = scanner.nextInt();
+                        scanner.nextLine();
+                        Aluno.mostrarCargaHorariaAlunoPorMatricula(matriculaAluno, alunos);
                         break;
                     case 7:
                         System.out.println(

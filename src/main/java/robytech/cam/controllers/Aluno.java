@@ -57,22 +57,28 @@ public class Aluno {
     public void setQuantidadeAtividades(int quantidadeAtividades) {
         this.quantidadeAtividades = quantidadeAtividades;
     }
-
+    /*
+     * corrigir erros de salvar dados no caso de espaço
+     * e verificar correção de erros do "s" "sim" ou "nao"
+     */
     public static boolean salvarAluno(ArrayList<Aluno> alunos, Aluno aluno) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Deseja salvar os dados do aluno? (s/n): ");
         String respostaSalvar = scanner.nextLine();
 
-        if (respostaSalvar.equalsIgnoreCase("s")) {
+        if (respostaSalvar.equalsIgnoreCase("s") || respostaSalvar.equalsIgnoreCase("sim")) {
             System.out.println("Dados salvos!");
             alunos.add(aluno);
             return true;
         } else {
             System.out.println("Dados nao salvos.");
-            return false; 
+            return false;
         }
     }
-
+    /*
+     * corrigir erros cadastro, nome, matricula, curso
+     * 
+     */
     public static Aluno cadatrarAluno(ArrayList<Aluno> alunos) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Informe o Nome Completo do aluno: ");
@@ -102,4 +108,37 @@ public class Aluno {
         return false;
     }
 
+    public static void mostrarCargaHorariaTotal(ArrayList<Aluno> alunos) {
+        if (alunos.isEmpty()) {
+            System.out.println("Nenhum aluno está cadastrado.");
+        } else {
+            System.out.println("Carga horária total das atividades complementares de todos os alunos cadastrados:");
+            for (Aluno aluno : alunos) {
+                System.out.println("Nome: " + aluno.getNomeCompleto());
+                System.out.println("Matrícula: " + aluno.getMatricula());
+                System.out.println("Curso: " + aluno.getCurso());
+                System.out.println("Carga Horária Total: " + aluno.getCargaHorariaTotal() + " horas");
+                System.out.println("Quantidade de Atividades Complementares: " + aluno.getQuantidadeAtividades());
+                System.out.println("------------------------");
+            }
+        }
+    }
+
+    public static void mostrarCargaHorariaAlunoPorMatricula(int matricula, ArrayList<Aluno> alunos) {
+        boolean encontrado = false;
+        for (Aluno aluno : alunos) {
+            if (aluno.getMatricula() == matricula) {
+                System.out.println("Nome: " + aluno.getNomeCompleto());
+                System.out.println("Matrícula: " + aluno.getMatricula());
+                System.out.println("Curso: " + aluno.getCurso());
+                System.out.println("Carga Horária Total: " + aluno.getCargaHorariaTotal() + " horas");
+                System.out.println("Quantidade de Atividades Complementares: " + aluno.getQuantidadeAtividades());
+                encontrado = true;
+                break;
+            }
+        }
+        if (!encontrado) {
+            System.out.println("Aluno com a matrícula " + matricula + " nao encontrado, ou nao foi cadastrado no sistema");
+        }
+    }
 }
