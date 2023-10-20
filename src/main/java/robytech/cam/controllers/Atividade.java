@@ -13,9 +13,11 @@ public class Atividade {
     private int cargaHorariaConsiderada;
 
     /**
-     * @param nomeAluno Nome do Aluno para Fazer o Cadastro da Atividade
-     * @param matricula Matricula do Aluno Para Fazer o Cadastro da Atividade
-     * @param grupoAtividade Digito para Grupo da Atividade Para o Cadastro da Atividade
+     * @param nomeAluno          Nome do Aluno para Fazer o Cadastro da Atividade
+     * @param matricula          Matricula do Aluno Para Fazer o Cadastro da
+     *                           Atividade
+     * @param grupoAtividade     Digito para Grupo da Atividade Para o Cadastro da
+     *                           Atividade
      * @param descricaoAtividade Descrição da Atividade Para o Cadastro da Atividade
      */
     public Atividade(String nomeAluno, int matricula, int grupoAtividade, String descricaoAtividade) {
@@ -86,10 +88,10 @@ public class Atividade {
 
     public static boolean salvarAtividade(ArrayList<Atividade> atividades, Atividade atividade) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Deseja salvar as informações da atividade? (s/n): ");
-        String respostaSalvar = scanner.nextLine();
+        System.out.print("Deseja salvar as informaçoes da atividade? (s/n): ");
+        String respostaSalvar = scanner.nextLine().trim().toLowerCase();
 
-        if (respostaSalvar.equalsIgnoreCase("s")||respostaSalvar.equalsIgnoreCase("sim")) {
+        if (respostaSalvar.equalsIgnoreCase("s") || respostaSalvar.equalsIgnoreCase("sim")) {
             System.out.println("Informaçoes salvas!");
             atividades.add(atividade);
             return true;
@@ -108,12 +110,20 @@ public class Atividade {
 
             String nomeAluno = alunoEncontrado.getNomeCompleto();
             scanner.nextLine();
-            System.out.print("Digite o grupo da atividade: ");
-            int grupoAtividade = scanner.nextInt();
-            scanner.nextLine();
+            int grupoAtividade = 0;
+            while (true) {
+                System.out.print("Digite o grupo da atividade: ");
+                if (scanner.hasNextInt()) {
+                    grupoAtividade = scanner.nextInt();
+                    scanner.nextLine();
+                    break;
+                } else {
+                    System.out.println("Erro: A matrícula deve conter apenas números. Por favor, tente novamente.");
+                    scanner.nextLine();
+                }
+            }
             System.out.print("Digite a descriçao da atividade: ");
             String descricaoAtividade = scanner.nextLine();
-
             Atividade atividade = new Atividade(nomeAluno, matricula, grupoAtividade, descricaoAtividade);
             boolean dadosSalvos = salvarAtividade(atividades, atividade);
             if (dadosSalvos) {
@@ -165,12 +175,32 @@ public class Atividade {
 
     public static void alterarStatusAproveitamento(ArrayList<Atividade> atividades, ArrayList<Aluno> alunos) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Digite a matrícula do aluno: ");
-        int matricula = scanner.nextInt();
-        scanner.nextLine();
-        System.out.print("Digite o número de registro da atividade: ");
-        int numeroRegistro = scanner.nextInt();
-        scanner.nextLine();
+        int matricula = 0;
+        while (true) {
+            System.out.println("Digite a Matrícula do Aluno: ");
+            if (scanner.hasNextInt()) {
+                matricula = scanner.nextInt();
+                scanner.nextLine();
+                break;
+            } else {
+                System.out.println("Erro: A matrícula deve conter apenas números. Por favor, tente novamente.");
+                scanner.nextLine();
+            }
+        }
+        int numeroRegistro = 0;
+        while (true) {
+            System.out.print("Digite o número de registro da atividade: ");
+            if (scanner.hasNextInt()) {
+                numeroRegistro = scanner.nextInt();
+                scanner.nextLine();
+                break;
+            } else {
+                System.out
+                        .println("Erro: A número de registro deve conter apenas números. Por favor, tente novamente.");
+                scanner.nextLine();
+            }
+            scanner.nextLine();
+        }
 
         Atividade atividadeEncontrada = encontrarAtividadePorMatriculaENumeroRegistro(matricula, numeroRegistro,
                 atividades);
@@ -197,7 +227,7 @@ public class Atividade {
                 System.out.println("Atividade reprovada.");
             }
         } else {
-            System.out.println("Atividade não encontrada para a matrícula e número de registro fornecidos.");
+            System.out.println("Atividade nao encontrada para a matrícula e número de registro fornecidos.");
         }
     }
 

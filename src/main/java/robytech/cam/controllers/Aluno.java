@@ -2,6 +2,7 @@ package main.java.robytech.cam.controllers;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Aluno {
     private String nomeCompleto;
@@ -63,14 +64,10 @@ public class Aluno {
         this.quantidadeAtividades = quantidadeAtividades;
     }
 
-    /*
-     * corrigir erros de salvar dados no caso de espaço
-     * e verificar correção de erros do "s" "sim" ou "nao"
-     */
     public static boolean salvarAluno(ArrayList<Aluno> alunos, Aluno aluno) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Deseja salvar os dados do aluno? (s/n): ");
-        String respostaSalvar = scanner.nextLine();
+        String respostaSalvar = scanner.nextLine().trim().toLowerCase();
 
         if (respostaSalvar.equalsIgnoreCase("s") || respostaSalvar.equalsIgnoreCase("sim")) {
             System.out.println("Dados salvos!");
@@ -88,13 +85,40 @@ public class Aluno {
      */
     public static Aluno cadatrarAluno(ArrayList<Aluno> alunos) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Informe o Nome Completo do aluno: ");
-        String nomeCompleto = scanner.nextLine();
-        System.out.println("Informe a Matrícula do Aluno: ");
-        int matricula = scanner.nextInt();
-        scanner.nextLine();
-        System.out.println("Informe o Curso do Aluno: ");
-        String curso = scanner.nextLine();
+        String nomeCompleto = "";
+        while (true) {
+            System.out.println("Informe o Nome Completo do aluno: ");
+            nomeCompleto = scanner.nextLine();
+            if (Pattern.matches("^[a-zA-Z ]+$", nomeCompleto)) {
+                break;
+            } else {
+                System.out.println("Erro: O nome deve conter apenas letras. Por favor, tente novamente.");
+            }
+        }
+
+        int matricula = 0;
+        while (true) {
+            System.out.println("Informe a Matrícula do Aluno: ");
+            if (scanner.hasNextInt()) {
+                matricula = scanner.nextInt();
+                scanner.nextLine();
+                break;
+            } else {
+                System.out.println("Erro: A matrícula deve conter apenas números. Por favor, tente novamente.");
+                scanner.nextLine();
+            }
+        }
+
+        String curso = "";
+        while (true) {
+            System.out.println("Informe o Curso do Aluno: ");
+            curso = scanner.nextLine();
+            if (Pattern.matches("^[a-zA-Z ]+$", curso)) {
+                break;
+            } else {
+                System.out.println("Erro: O curso deve conter apenas letras. Por favor, tente novamente.");
+            }
+        }
         Aluno aluno = new Aluno(nomeCompleto, matricula, curso);
         boolean dadosSalvos = salvarAluno(alunos, aluno);
         if (dadosSalvos) {

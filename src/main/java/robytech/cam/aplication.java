@@ -8,7 +8,7 @@ import main.java.robytech.cam.controllers.Atividade;
 
 public class aplication {
     public static void main(String[] args) {
-        
+
         ArrayList<Aluno> alunos = new ArrayList<>();
         ArrayList<Atividade> atividades = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
@@ -35,8 +35,19 @@ public class aplication {
                         Atividade atividade = Atividade.cadastrarAtividade(alunos, atividades);
                         break;
                     case 3:
-                        System.out.print("Digite a matrícula do aluno para pesquisar atividades: ");
-                        int matricula = scanner.nextInt();
+                        int matricula = 0;
+                        while (true) {
+                            System.out.print("Digite a matrícula do aluno para pesquisar atividades: ");
+                            if (scanner.hasNextInt()) {
+                                matricula = scanner.nextInt();
+                                scanner.nextLine();
+                                break;
+                            } else {
+                                System.out.println(
+                                        "Erro: A matrícula deve conter apenas números. Por favor, tente novamente.");
+                                scanner.nextLine();
+                            }
+                        }
                         Atividade.exibirAtividadesPorMatricula(atividades, matricula);
                         break;
                     case 4:
@@ -46,10 +57,19 @@ public class aplication {
                         Aluno.mostrarCargaHorariaTotal(alunos);
                         break;
                     case 6:
-                        System.out.print("Digite a matrícula do aluno para visualizar a carga horária total: ");
-                        int matriculaAluno = scanner.nextInt();
-                        scanner.nextLine();
-                        Aluno.mostrarCargaHorariaAlunoPorMatricula(matriculaAluno, alunos);
+                        while (true) {
+                            System.out.print("Digite a matrícula do aluno para mostrar as atividades complementares: ");
+                            if (scanner.hasNextInt()) {
+                                matricula = scanner.nextInt();
+                                scanner.nextLine();
+                                break;
+                            } else {
+                                System.out.println(
+                                        "Erro: A matrícula deve conter apenas números. Por favor, tente novamente.");
+                                scanner.nextLine();
+                            }
+                        }
+                        Aluno.mostrarCargaHorariaAlunoPorMatricula(matricula, alunos);
                         break;
                     case 7:
                         System.out.println(
