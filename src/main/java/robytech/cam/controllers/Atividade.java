@@ -12,6 +12,12 @@ public class Atividade {
     private boolean statusAproveitamento;
     private int cargaHorariaConsiderada;
 
+    /**
+     * @param nomeAluno Nome do Aluno para Fazer o Cadastro da Atividade
+     * @param matricula Matricula do Aluno Para Fazer o Cadastro da Atividade
+     * @param grupoAtividade Digito para Grupo da Atividade Para o Cadastro da Atividade
+     * @param descricaoAtividade Descrição da Atividade Para o Cadastro da Atividade
+     */
     public Atividade(String nomeAluno, int matricula, int grupoAtividade, String descricaoAtividade) {
         this.nomeAluno = nomeAluno;
         this.matricula = matricula;

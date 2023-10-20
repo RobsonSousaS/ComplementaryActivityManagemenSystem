@@ -12,6 +12,11 @@ public class Aluno {
 
     Scanner scanner = new Scanner(System.in);
 
+    /**
+     * @param nomeCompleto Nome Completo do aluno
+     * @param matricula    Matricula do ALuno
+     * @param curso        Curso do Aluno
+     */
     public Aluno(String nomeCompleto, int matricula, String curso) {
         this.nomeCompleto = nomeCompleto;
         this.matricula = matricula;
@@ -57,6 +62,7 @@ public class Aluno {
     public void setQuantidadeAtividades(int quantidadeAtividades) {
         this.quantidadeAtividades = quantidadeAtividades;
     }
+
     /*
      * corrigir erros de salvar dados no caso de espaço
      * e verificar correção de erros do "s" "sim" ou "nao"
@@ -75,6 +81,7 @@ public class Aluno {
             return false;
         }
     }
+
     /*
      * corrigir erros cadastro, nome, matricula, curso
      * 
@@ -138,7 +145,8 @@ public class Aluno {
             }
         }
         if (!encontrado) {
-            System.out.println("Aluno com a matrícula " + matricula + " nao encontrado, ou nao foi cadastrado no sistema");
+            System.out.println(
+                    "Aluno com a matrícula " + matricula + " nao encontrado, ou nao foi cadastrado no sistema");
         }
     }
 }
