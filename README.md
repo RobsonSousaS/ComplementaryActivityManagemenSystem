@@ -47,7 +47,7 @@ Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou env
 
 ## Licença
 
-Este projeto é licenciado sob a [Licença MIT](LICENSE.txt).
+Este projeto é licenciado sob a [Licença MIT](LICENSE).
 
 --- 
 
