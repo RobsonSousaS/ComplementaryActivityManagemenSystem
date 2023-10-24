@@ -79,10 +79,6 @@ public class Aluno {
         }
     }
 
-    /*
-     * corrigir erros cadastro, nome, matricula, curso
-     * 
-     */
     public static Aluno cadatrarAluno(ArrayList<Aluno> alunos) {
         Scanner scanner = new Scanner(System.in);
         String nomeCompleto = "";
