@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class Aluno {
     private String nomeCompleto;
-    private int matricula;
+    private static int matricula;
     private String curso;
     private int cargaHorariaTotal;
     private int quantidadeAtividades;
@@ -155,7 +155,21 @@ public class Aluno {
         }
     }
 
-    public static void mostrarCargaHorariaAlunoPorMatricula(int matricula, ArrayList<Aluno> alunos) {
+    public static void mostrarCargaHorariaAlunoPorMatricula(ArrayList<Aluno> alunos) {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.print("Digite a matrícula do aluno para mostrar as atividades complementares: ");
+            if (scanner.hasNextInt()) {
+                matricula = scanner.nextInt();
+                scanner.nextLine();
+                break;
+            } else {
+                System.out.println(
+                        "Erro: A matrícula deve conter apenas números. Por favor, tente novamente.");
+                scanner.nextLine();
+            }
+        }
+
         boolean encontrado = false;
         for (Aluno aluno : alunos) {
             if (aluno.getMatricula() == matricula) {

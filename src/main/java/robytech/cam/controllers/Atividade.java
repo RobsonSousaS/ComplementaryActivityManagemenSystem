@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Atividade {
     private String nomeAluno;
     private int matricula;
+    private static int numeroRegistroCounter = 1;
     private int numeroRegistro;
     private int grupoAtividade;
     private String descricaoAtividade;
@@ -27,7 +28,8 @@ public class Atividade {
         this.descricaoAtividade = descricaoAtividade;
         this.statusAproveitamento = false;
         this.cargaHorariaConsiderada = 0;
-        this.numeroRegistro = numeroRegistro++;
+        this.numeroRegistro = numeroRegistroCounter;
+        numeroRegistroCounter++;
     }
 
     public int getNumeroRegistro() {
@@ -103,8 +105,17 @@ public class Atividade {
 
     public static Atividade cadastrarAtividade(ArrayList<Aluno> alunos, ArrayList<Atividade> atividades) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Digite a matrícula do aluno: ");
-        int matricula = scanner.nextInt();
+        int matricula = 0;
+        while (true) {
+            System.out.println("Digite a matrícula do aluno: ");
+            if (scanner.hasNextInt()) {
+                matricula = scanner.nextInt();
+                break;
+            } else {
+                System.out.println("Erro: A matrícula deve conter apenas números. Por favor, tente novamente.");
+                scanner.nextLine();
+            }
+        }
         Aluno alunoEncontrado = encontrarAlunoPorMatricula(matricula, alunos);
         if (alunoEncontrado != null) {
 
@@ -118,16 +129,18 @@ public class Atividade {
                     scanner.nextLine();
                     break;
                 } else {
-                    System.out.println("Erro: A matrícula deve conter apenas números. Por favor, tente novamente.");
+                    System.out.println(
+                            "Erro: O grupo de atividade deve conter apenas números. Por favor, tente novamente.");
                     scanner.nextLine();
                 }
             }
-            System.out.print("Digite a descriçao da atividade: ");
+            System.out.print("Digite a descrição da atividade: ");
             String descricaoAtividade = scanner.nextLine();
             Atividade atividade = new Atividade(nomeAluno, matricula, grupoAtividade, descricaoAtividade);
             boolean dadosSalvos = salvarAtividade(atividades, atividade);
             if (dadosSalvos) {
-                System.out.println("Atividade cadastrada com sucesso!");
+                System.out.println("Atividade cadastrada com sucesso! Numero de registro da atividade é "
+                        + atividade.getNumeroRegistro());
             } else {
                 System.out.println("Cadastro da atividade cancelado.");
             }
@@ -135,7 +148,7 @@ public class Atividade {
             return atividade;
         } else {
 
-            System.out.println("Matrícula nao encontrada. Nao é possível cadastrar a atividade.");
+            System.out.println("Matrícula não encontrada. Não é possível cadastrar a atividade.");
             return null;
         }
     }
@@ -159,7 +172,21 @@ public class Atividade {
         System.out.println("Carga Horária Considerada: " + cargaHorariaConsiderada + " horas\n");
     }
 
-    public static void exibirAtividadesPorMatricula(ArrayList<Atividade> atividades, int matricula) {
+    public static void exibirAtividadesPorMatricula(ArrayList<Atividade> atividades) {
+        Scanner scanner = new Scanner(System.in);
+        int matricula = 0;
+        while (true) {
+            System.out.print("Digite a matrícula do aluno para pesquisar atividades: ");
+            if (scanner.hasNextInt()) {
+                matricula = scanner.nextInt();
+                scanner.nextLine();
+                break;
+            } else {
+                System.out.println(
+                        "Erro: A matrícula deve conter apenas números. Por favor, tente novamente.");
+                scanner.nextLine();
+            }
+        }
         boolean encontrou = false;
         for (Atividade atividade : atividades) {
             if (atividade.getMatricula() == matricula) {
@@ -196,21 +223,35 @@ public class Atividade {
                 break;
             } else {
                 System.out
-                        .println("Erro: A número de registro deve conter apenas números. Por favor, tente novamente.");
+                        .println("Erro: O número de registro deve conter apenas números. Por favor, tente novamente.");
                 scanner.nextLine();
             }
-            scanner.nextLine();
         }
 
         Atividade atividadeEncontrada = encontrarAtividadePorMatriculaENumeroRegistro(matricula, numeroRegistro,
                 atividades);
         if (atividadeEncontrada != null) {
-            System.out.print("Digite o novo status de aproveitamento (TRUE ou FALSE): ");
-            boolean novoStatusAproveitamento = scanner.nextBoolean();
-            scanner.nextLine();
+            System.out.print("Digite o novo status de aproveitamento (true ou false): ");
+            String novoStatusAproveitamentoStr = scanner.nextLine();
+            boolean novoStatusAproveitamento;
+            if (novoStatusAproveitamentoStr.equalsIgnoreCase("true")) {
+                novoStatusAproveitamento = true;
+            } else if (novoStatusAproveitamentoStr.equalsIgnoreCase("false")) {
+                novoStatusAproveitamento = false;
+            } else {
+                System.out.println("Erro: Digite apenas 'true' ou 'false' para o status de aproveitamento.");
+                return;
+            }
             System.out.print("Digite a carga horária considerada: ");
-            int cargaHorariaConsiderada = scanner.nextInt();
-            scanner.nextLine();
+            int cargaHorariaConsiderada = 0;
+            if (scanner.hasNextInt()) {
+                cargaHorariaConsiderada = scanner.nextInt();
+                scanner.nextLine();
+            } else {
+                System.out.println("Erro: A carga horária deve conter apenas números. Por favor, tente novamente.");
+                scanner.nextLine();
+                return;
+            }
 
             atividadeEncontrada.setStatusAproveitamento(novoStatusAproveitamento);
             atividadeEncontrada.setCargaHorariaConsiderada(cargaHorariaConsiderada);
@@ -227,7 +268,7 @@ public class Atividade {
                 System.out.println("Atividade reprovada.");
             }
         } else {
-            System.out.println("Atividade nao encontrada para a matrícula e número de registro fornecidos.");
+            System.out.println("Atividade não encontrada para a matrícula e número de registro fornecidos.");
         }
     }
 
