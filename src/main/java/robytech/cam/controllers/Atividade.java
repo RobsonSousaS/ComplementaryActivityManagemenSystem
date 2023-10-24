@@ -242,15 +242,18 @@ public class Atividade {
                 System.out.println("Erro: Digite apenas 'true' ou 'false' para o status de aproveitamento.");
                 return;
             }
-            System.out.print("Digite a carga horária considerada: ");
+            
             int cargaHorariaConsiderada = 0;
-            if (scanner.hasNextInt()) {
-                cargaHorariaConsiderada = scanner.nextInt();
-                scanner.nextLine();
-            } else {
-                System.out.println("Erro: A carga horária deve conter apenas números. Por favor, tente novamente.");
-                scanner.nextLine();
-                return;
+            while (true) {
+                System.out.print("Digite a carga horária considerada: ");
+                if (scanner.hasNextInt()) {
+                    cargaHorariaConsiderada = scanner.nextInt();
+                    scanner.nextLine();
+                    break;
+                } else {
+                    System.out.println("Erro: A carga horária deve conter apenas números. Por favor, tente novamente.");
+                    scanner.nextLine();
+                }
             }
 
             atividadeEncontrada.setStatusAproveitamento(novoStatusAproveitamento);

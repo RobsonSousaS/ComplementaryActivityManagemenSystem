@@ -35,7 +35,6 @@ public class aplication {
                         Atividade atividade = Atividade.cadastrarAtividade(alunos, atividades);
                         break;
                     case 3:
-
                         Atividade.exibirAtividadesPorMatricula(atividades);
                         break;
                     case 4:
